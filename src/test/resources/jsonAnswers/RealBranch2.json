@@ -1,0 +1,26 @@
+[
+    {
+        "name": "master",
+        "commit": {
+            "sha": "1d1741acebdc274af4795f4ca0faf88830a2a010",
+            "url": "https://api.github.com/repos/materusPL/Nixerus/commits/1d1741acebdc274af4795f4ca0faf88830a2a010"
+        },
+        "protected": false
+    },
+    {
+        "name": "mock",
+        "commit": {
+            "sha": "f07f3e99a7cd8680dd6bb082108a67830857e542",
+            "url": "https://api.github.com/repos/materusPL/Nixerus/commits/f07f3e99a7cd8680dd6bb082108a67830857e542"
+        },
+        "protected": false
+    },
+    {
+        "name": "testing",
+        "commit": {
+            "sha": "b27a11bb37445c941cb5ad610292358a5d184773",
+            "url": "https://api.github.com/repos/materusPL/Nixerus/commits/b27a11bb37445c941cb5ad610292358a5d184773"
+        },
+        "protected": false
+    }
+]

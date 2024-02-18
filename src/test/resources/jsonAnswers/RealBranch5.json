@@ -1,0 +1,10 @@
+[
+    {
+        "name": "master",
+        "commit": {
+            "sha": "8c5c94c47aa1cf7850a6b0df9495808593a8fdba",
+            "url": "https://api.github.com/repos/materusPL/SNOL/commits/8c5c94c47aa1cf7850a6b0df9495808593a8fdba"
+        },
+        "protected": false
+    }
+]

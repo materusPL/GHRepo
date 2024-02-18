@@ -1,0 +1,18 @@
+[
+    {
+        "name": "inputs",
+        "commit": {
+            "sha": "06a35210af4b8586a2b3d64815a67e3516ce732a",
+            "url": "https://api.github.com/repos/materusPL/nixos-config/commits/06a35210af4b8586a2b3d64815a67e3516ce732a"
+        },
+        "protected": false
+    },
+    {
+        "name": "master",
+        "commit": {
+            "sha": "59e69924bb18acd396a15bb166743c037d4df756",
+            "url": "https://api.github.com/repos/materusPL/nixos-config/commits/59e69924bb18acd396a15bb166743c037d4df756"
+        },
+        "protected": false
+    }
+]
