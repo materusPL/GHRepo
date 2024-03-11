@@ -49,8 +49,8 @@ public class GitHubControllerTest {
 
         var response = githubController.handleResponseException(e);
         assertNotNull(response.getBody());
-        assertEquals(404, response.getBody().getStatus());
-        assertEquals("User not found", response.getBody().getMessage());
+        assertEquals(404, response.getBody().status());
+        assertEquals("User not found", response.getBody().message());
     }
 
     @SuppressWarnings("null")
@@ -61,8 +61,8 @@ public class GitHubControllerTest {
 
         var response = githubController.handleResponseException(e);
         assertNotNull(response.getBody());
-        assertEquals(400, response.getBody().getStatus());
-        assertEquals("Request does not contain the 'application/json' header.", response.getBody().getMessage());
+        assertEquals(400, response.getBody().status());
+        assertEquals("Request does not contain the 'application/json' header.", response.getBody().message());
     }
 
     @SuppressWarnings("null")
@@ -82,7 +82,7 @@ public class GitHubControllerTest {
 
         var response = githubController.handleResponseException(e);
         assertNotNull(response.getBody());
-        assertEquals(403, response.getBody().getStatus());
-        assertEquals("Github API limit", response.getBody().getMessage());
+        assertEquals(403, response.getBody().status());
+        assertEquals("Github API limit", response.getBody().message());
     }
 }

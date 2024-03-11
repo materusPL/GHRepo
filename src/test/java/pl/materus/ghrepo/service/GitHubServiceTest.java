@@ -74,27 +74,27 @@ public class GitHubServiceTest {
 
         var response = gitHubService.getUserRepos("materusPL").collectList().block();
         response.sort((repo1, repo2) -> {
-            return repo1.getName().compareTo(repo2.getName());
+            return repo1.name().compareTo(repo2.name());
         });
 
-        assertEquals("Nixerus", response.get(0).getName());
-        assertEquals("SNOL", response.get(1).getName());
-        assertEquals("materusPL", response.get(2).getName());
-        assertEquals("nixos-config", response.get(3).getName());
+        assertEquals("Nixerus", response.get(0).name());
+        assertEquals("SNOL", response.get(1).name());
+        assertEquals("materusPL", response.get(2).name());
+        assertEquals("nixos-config", response.get(3).name());
 
         String owner = "materusPL";
 
-        assertEquals(owner, response.get(0).getOwner());
-        assertEquals(owner, response.get(1).getOwner());
-        assertEquals(owner, response.get(2).getOwner());
-        assertEquals(owner, response.get(3).getOwner());
+        assertEquals(owner, response.get(0).owner());
+        assertEquals(owner, response.get(1).owner());
+        assertEquals(owner, response.get(2).owner());
+        assertEquals(owner, response.get(3).owner());
 
-        assertEquals("master", response.get(2).getBranches().get(0).getName());
-        assertEquals("fd6867d8963147ba40d3df428045aec82f14dbe3", response.get(2).getBranches().get(0).getSha());
+        assertEquals("master", response.get(2).branches().get(0).name());
+        assertEquals("fd6867d8963147ba40d3df428045aec82f14dbe3", response.get(2).branches().get(0).sha());
 
-        assertEquals(3, response.get(0).getBranches().size());
-        assertEquals(2, response.get(3).getBranches().size());
-        assertEquals(1, response.get(2).getBranches().size());
+        assertEquals(3, response.get(0).branches().size());
+        assertEquals(2, response.get(3).branches().size());
+        assertEquals(1, response.get(2).branches().size());
 
     }
 

@@ -28,13 +28,12 @@ public class GitHubService {
                 .uri("/users/{username}/repos", username)
                 .retrieve()
                 .bodyToFlux(GitHubRepositoryModel.class)
-                .filter(repo -> !repo.getFork())
+                .filter(repo -> !repo.fork())
                 .flatMap(this::createResponse)
-                .flatMap(repo -> getRepoBranches(repo.getOwner(), repo.getName())
+                .flatMap(loginName -> getRepoBranches(loginName[0], loginName[1])
                         .collectList()
                         .map(branches -> {
-                            repo.setBranches(branches);
-                            return repo;
+                            return new ResponseRepositoryModel(loginName[1], loginName[0], branches);
                         }))
                 .subscribeOn(Schedulers.boundedElastic());
 
@@ -49,17 +48,13 @@ public class GitHubService {
 
     }
 
-    private Mono<ResponseRepositoryModel> createResponse(GitHubRepositoryModel repository) {
-        ResponseRepositoryModel responseRepositoryModel = new ResponseRepositoryModel();
-        responseRepositoryModel.setName(repository.getName());
-        responseRepositoryModel.setOwner(repository.getOwner().getLogin());
-        return Mono.just(responseRepositoryModel);
+    private Mono<String[]> createResponse(GitHubRepositoryModel repository) {
+        String[] ret = { repository.owner().login(),repository.name() };
+        return Mono.just(ret);
     }
 
     private Mono<ResponseBranchModel> createResponseBranch(GitHubBranchModel branch) {
-        ResponseBranchModel responseBranchModel = new ResponseBranchModel();
-        responseBranchModel.setName(branch.getName());
-        responseBranchModel.setSha(branch.getCommit().getSha());
+        ResponseBranchModel responseBranchModel = new ResponseBranchModel(branch.name(), branch.commit().sha());
         return Mono.just(responseBranchModel);
     }
 
