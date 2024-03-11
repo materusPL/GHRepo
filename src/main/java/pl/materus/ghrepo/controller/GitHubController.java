@@ -7,7 +7,6 @@ import pl.materus.ghrepo.service.GitHubService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,41 +43,13 @@ public class GitHubController {
     @ExceptionHandler(WebClientResponseException.class)
     public ResponseEntity<ResponseErrorModel> handleResponseException(WebClientResponseException ex) {
 
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-
-        String message;
-        Integer statusCode = ex.getStatusCode().value();
-        switch (statusCode) {
-            case 404:
-                message = "User not found";
-                status = HttpStatus.NOT_FOUND;
-                break;
-
-            case 403:
-                message = "Github API limit";
-                status = HttpStatus.FORBIDDEN;
-                break;
-
-            default:
-                message = "Unknown github webclient error";
-                break;
-
-        }
-
-        ResponseErrorModel responseErrorModel = new ResponseErrorModel(statusCode,message);
-        return ResponseEntity.status(status).headers(httpHeaders).body(responseErrorModel);
+        return gitHubService.handleWebClientException(ex);
 
     }
 
     @ExceptionHandler(WrongHeaderException.class)
     public ResponseEntity<ResponseErrorModel> handleResponseException(WrongHeaderException ex) {
-        ResponseErrorModel responseErrorModel = new ResponseErrorModel(HttpStatus.BAD_REQUEST.value(),ex.getMessage());
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-
-        return ResponseEntity.badRequest().headers(httpHeaders).body(responseErrorModel);
+        return gitHubService.handleWrongHeaderException(ex);
     }
 }
